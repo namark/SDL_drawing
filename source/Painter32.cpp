@@ -17,6 +17,8 @@ Color32& Color32::blend(const Color32& color)
     sourceChannel = color.blue();
 
     blue( (uint32)blue() + ((sourceAlpha*(sourceChannel-blue()))>>8) );
+
+	return *this;
 }
 
 
@@ -43,7 +45,7 @@ Canvas32::Canvas32(uint32* pixels, uint width, uint height, bool copy) :  w(widt
 
 void Canvas32::cleanup()
 {
-    if(flags.flag(FREE_THE_SURFACE))
+    if(flags[FREE_THE_SURFACE])
     {
         delete [] sur;
         flags.clear(FREE_THE_SURFACE);
